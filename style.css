@@ -350,13 +350,15 @@ body {
     pointer-events: none;
     border-radius: 20px;
 }
-.Design {
-    width: 1475px;
 
+.Design {
+    position: absolute;
+    width: 1475px;
     height: 300px;
     margin: 30px;
     transform: translateY(-50px);
 }
+
 .title-area h1 {
     font-size: 5rem;
     width: 60px;
