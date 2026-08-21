@@ -398,7 +398,7 @@ html, body {
 /* let this one be for the bot part, still a part of h1, we make it like chess.com, adjustable sized images per image option.*/
 .Largo {
     position: fixed;
-    left: 70%;
+    left: 90%;
     bottom: 30px;
     width: 300px;
     height: 300px;
@@ -444,7 +444,7 @@ html, body {
 }
 .Margo {
     position: fixed;
-    left: 29.9%;
+    left: 10%;
     bottom: 30px;
     width: 300px;
     height: 300px;
