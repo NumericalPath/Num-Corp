@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Numerical Path: Ultra Deluxe</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+    <button id="backMenuBtn" class="back-menu-btn" onclick="backToMainMenu()">
+        <img src="Images/L2.jpg" alt="Back to Main Menu">
+    </button>
+
+  <div id="game" style="display:none;">
+
+    <!-- Player controls -->
+    <div class="controls">
+        <h2 id="turnLabel">Player 1 Turn</h2>
+
+        <div style="font-size: 1.5rem;">
+            P1: <span id="p1-score">0</span> 
+            P2: <span id="p2-score">0</span>
+        </div>
+
+        <!-- Draw Card doesnt work maybe we should remove? -->
+        <button id="drawBtn" class="btn btn-draw" onclick="drawCard()">
+    DRAW MOVE CARD
+</button>
+
+        <!-- Teacher Mode maybe it works-->
+        <label style="margin-left:10px; font-weight:bold;">
+            <input type="checkbox" id="teacherMode"> Teacher Mode
+        </label>
+    </div>
+
+	<!--Reminder that this is just the place holder [emojis] for the things, implement interavtable pictures soon-->
+    <div id="leaderboard">
+        <h2>🏆 LEADERBOARD</h2>
+
+        <div class="player-row p1-row">
+            <span>🔵 Player 1</span>
+            <div class="chips">
+                🍍 <span id="p1-pine">0</span>
+                🍇 <span id="p1-grape">0</span>
+                🍓 <span id="p1-straw">0</span>
+            </div>
+            <div class="total">Score: <span id="p1-total">0</span></div>
+        </div>
+
+        <div class="player-row p2-row">
+            <span>🔴 Player 2</span>
+            <div class="chips">
+                🍍 <span id="p2-pine">0</span>
+                🍇 <span id="p2-grape">0</span>
+                🍓 <span id="p2-straw">0</span>
+            </div>
+            <div class="total">Score: <span id="p2-total">0</span></div>
+        </div>
+    </div>
+
+    <!-- the MAIN PART DO NOT TINKER WITH IT unless its a backup -->
+    <div class="board-container" id="board">
+        <div class="center-branding">
+            <div class="shop-logo">SHOP!</div>
+            <div class="main-title">THE<br>NUMERICAL<br>PATH</div>
+            <div class="card-deck-visual"><strong>CARDS<br>PLAYING</strong></div>
+        </div>
+    </div>
+
+</div>
+
+<div id="statsPanel">
+    <h3>Student Statistics</h3>
+    <div id="wrongList">No mistakes yet</div>
+</div>
+
+<div class="bg-shapes">
+    <div class="shape" style="width: 150px; height: 150px; left: 10%; animation-duration: 25s;"></div>
+    <div class="shape" style="width: 80px; height: 80px; left: 30%; animation-duration: 15s; animation-delay: 2s;"></div>
+    <div class="shape" style="width: 200px; height: 200px; left: 70%; animation-duration: 30s; animation-delay: 5s;"></div>
+    <div class="shape" style="width: 50px; height: 50px; left: 85%; animation-duration: 12s; animation-delay: 1s;"></div>
+    <div class="shape" style="width: 120px; height: 120px; left: 50%; animation-duration: 20s; animation-delay: 8s;"></div>
+</div>
+
+<div class="modal" id="tutorialModal">
+    <div class="modal-content">
+        <h1>Status</h1>
+        <p id="tutorialText" style="font-size:1.2rem; line-height:1.4;"></p>
+        <button class="btn" style="background:#27ae60; color:white;" onclick="closeTutorial()">CLOSE</button>
+    </div>
+</div>
+
+<div class="modal" id="shopModal">
+  <div class="modal-content">
+    <h1>SHOP OF LUCK</h1>
+    <div id="shopOptions"></div>
+    <button class="btn" style="background:#e74c3c; color:white; margin-top:10px;" onclick="closeShop()">CLOSE</button>
+  </div>
+</div>
+
+<div id="setup">
+    <div class="title-area">
+        <img class="Design" src="images/1.jpg" alt="Largo">
+        <h1></h1>
+    </div>
+
+<div id="player-options">
+        <button class="two-player-btn" onclick="startGame(false)">
+    <img src="Images/2.jpg" alt="2 Players">
+</button>
+
+        <button class="vs-bot-btn" onclick="showBotOptions()">
+    <img src="Images/3.jpg" alt="2 Players">
+</button>
+    </div>
+
+<div id="bot-options" style="display:none; margin-top: 20px; background: rgba(0,0,0,0.5); padding: 20px; border-radius: 15px;">
+    <button class="Largo" onclick="startBotGame('Easy')">
+        <img src="Images/Daniel2.jpg" alt="Largo">
+        <div class="character-tooltip">
+            <h3>DANIEL</h3>
+            <p>Easy Bot</p>
+            <span>Daniel, he tries his best.</span>
+        </div>
+    </button>
+
+    <button class="Bargo" onclick="startBotGame('Medium')">
+        <img src="Images/Raven2.jpg" alt="Bargo">
+        <div class="character-tooltip">
+            <h3>RAVEN</h3>
+            <p>Medium Bot</p>
+            <span>Raven is a sharp-minded kid who's completely engrossed in his phone, even with this setback he still continues to solve problems with minimal efficiency. With his favorite subject being math, he keeps players on their toes through fundamental mathematical properties that involves distributive, associative, and commutative laws.</span>
+        </div>
+    </button>
+
+    <button class="Margo" onclick="startBotGame('Hard')">
+        <img src="Images/Mar2.jpg" alt="Margo">
+        <div class="character-tooltip">
+            <h3>MAR</h3>
+            <p>Hard Bot</p>
+            <span>Mar is a determined and experienced student who never backs down from a difficult problem. With his advanced skills, he challenges players with solving for x, including equations that require several steps and careful thinking.</span>
+        </div>
+    </button>
+</div>
+
+</div> <!-- IMPORTANT:
+     DO NOT REMOVE THIS </div> pleae\se
+     This closes #setup BEFORE #game starts.
+     If #game is accidentally placed inside #setup,
+     startGame() hides #setup and the CARD MODAL WILL NOT APPEAR.
+     This bug wasted HOURS of Miles coding time
+-->
+
+<div id="game" style="display:none;">
+    <div class="controls">
+        <h2 id="turnLabel">Player 1 Turn</h2>
+        <div style="font-size: 1.5rem;">P1: <span id="p1-score">0</span> | P2: <span id="p2-score">0</span></div>
+        <label style="margin-left:10px; font-weight:bold;">
+
+  <input type="checkbox" id="teacherMode"> Teacher Mode
+ </label>
+</div>
+
+<div class="board-container" id="board">
+        <div class="center-branding">
+            <div class="shop-logo">SHOP!</div>
+            <div class="main-title">THE<br>NUMERICAL<br>PATH</div>
+            <div class="card-deck-visual"><strong>CARDS<br>PLAYING</strong></div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="cardModal">
+    <div class="modal-content">
+
+        <!-- THIS flips -->
+        <div class="flip-inner" id="flipCardInner">
+
+            <div class="flip-front">
+                <h1 style="font-size: 
+                3.5rem; 
+                text-shadow: 2px 2px 5px rgba(0,0,0,0.5); 
+                margin:0;">
+                    NUMERICAL<br>PATH
+                </h1>
+
+                <p style=
+                "font-size: 1.2rem; 
+                font-style: italic; 
+                margin-top:20px; 
+                background: rgba(0,0,0,0.3); 
+                padding: 5px 15px; 
+                border-radius: 10px;">
+                    Drawing Card...
+                </p>
+            </div>
+
+            <div class="flip-back">
+
+                <h2 id="timerDisp" style="color:red; margin:0;">30</h2>
+
+                <h1 id="question" style="margin: 10px 0;"></h1>
+
+                <input
+                    type="number"
+                    id="answerInput"
+                    style="width:80%; font-size:2rem; text-align:center;"
+                ><br>
+
+                <button
+                    class="btn"
+                    style="background:#27ae60; color:white; margin-top:10px"
+                    onclick="checkAnswer()">
+                    SUBMIT
+                </button>
+
+                <button
+                    class="btn"
+                    style="background:#e74c3c; color:white;"
+                    onclick="clearCanvas()">
+                    CLEAR
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- SCRATCH PAD IS OUTSIDE flip-inner -->
+        <canvas id="scratchPad" width="300" height="450">
+        </canvas>
+    
+
+    </div>
+</div>
+
+<script src="script.js"></script>
+
+<script src="script.js"></script>
+</body>
+</html>

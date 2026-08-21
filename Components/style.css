@@ -1,0 +1,691 @@
+#leaderboard {
+    margin-top: 15px;
+    background: rgba(0,0,0,0.7);
+    padding: 15px;
+    border-radius: 15px;
+    width: 700px;
+    box-shadow: 0 0 20px rgba(255,255,255,0.2);
+    animation: fadeInScale 0.5s ease;
+}
+
+#leaderboard h2 {
+    text-align: center;
+    margin: 0 0 10px 0;
+}
+
+.player-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 8px;
+    font-weight: bold;
+    transition: transform 0.2s;
+}
+
+.player-row:hover {
+    transform: scale(1.05);
+}
+
+.p1-row { background: rgba(59,130,246,0.3); }
+.p2-row { background: rgba(239,68,68,0.3); }
+
+.chips {
+    font-size: 1.2rem;
+}
+
+.total {
+    font-size: 1.2rem;
+    color: #f1c40f;
+}
+
+/*Flame container */
+.flame-border {
+    position: relative;
+    overflow: hidden;
+}
+
+/* LEFT + RIGHT flames */
+.flame-border::before,
+.flame-border::after {
+    content: "";
+    position: absolute;
+    top: -20%;
+    width: 40px;
+    height: 140%;
+    background: radial-gradient(circle at center, rgba(255,140,0,0.8), rgba(255,0,0,0.6), transparent 70%);
+    filter: blur(10px);
+    animation: flameFlow 2s infinite ease-in-out;
+}
+
+/* Left side */
+.flame-border::before {
+    left: -10px;
+}
+
+/* Right side */
+.flame-border::after {
+    right: -10px;
+    animation-delay: 1s;
+}
+
+/*  Smooth flowing animation */
+@keyframes flameFlow {
+    0%   { transform: translateY(-20%) scaleY(1); opacity: 0.7; }
+    50%  { transform: translateY(20%) scaleY(1.3); opacity: 1; }
+    100% { transform: translateY(-20%) scaleY(1); opacity: 0.7; }
+}
+
+.floating-chip {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+    animation: floatUp 1s ease forwards;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+@keyframes floatUp {
+    0% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    100% { opacity: 0; transform: translate(-50%, -150%) scale(1.5); }
+}
+
+#statsPanel{
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    width: 220px;
+    background: rgba(0,0,0,0.75);
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    z-index: 999;
+    box-shadow: 0 0 15px rgba(0,0,0,0.6);
+}
+
+#statsPanel h3{
+    margin-top:0;
+    text-align:center;
+    font-size:1.1rem;
+}
+
+#wrongList{
+    max-height:200px;
+    overflow-y:auto;
+}
+
+:root {
+    --p1: #3b82f6; --p2: #ef4444;
+    --tile-blue: #33ccff; --tile-yellow: #ffcc33; --tile-white: #ffffff;
+    --tile-purple: #9999ff; --tile-green: #99ff66; --tile-pink: #ff99cc;
+}
+
+/* --- NEW BACKGROUND EFFECTS --- */
+body { 
+    font-family: 'Poppins', sans-serif; 
+    margin: 0; padding: 10px;
+    display: flex; flex-direction: column; align-items: center;
+    color: #fff;
+    /* Animated Gradient Background */
+    background: linear-gradient(-45deg, #2c3e50, #1abc9c, #2980b9, #8e44ad);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    min-height: 100vh;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Floating Shapes Background */
+.bg-shapes {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; overflow: hidden; pointer-events: none;
+}
+.shape {
+    position: absolute; background: rgba(255,255,255,0.05); border-radius: 50%;
+    animation: floatShape infinite linear;
+}
+@keyframes floatShape {
+    0% { transform: translateY(100vh) scale(0); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: translateY(-20vh) scale(1.5); opacity: 0; }
+}
+/* ----------------------------- */
+
+/* --- NEW ANIMATIONS --- */
+@keyframes fadeInScale {
+    0% { opacity: 0; transform: scale(0.8); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes bounceTitle {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-20px); }
+    60% { transform: translateY(-10px); }
+}
+
+@keyframes popInModal {
+    0% { transform: scale(0.5) translateY(-100px); opacity: 0; }
+    80% { transform: scale(1.05) translateY(0); opacity: 1; }
+    100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+@keyframes pulseCardDeck {
+    0% { transform: rotate(180deg) scale(1); box-shadow: 0 0 0 rgba(51, 204, 255, 0); }
+    50% { transform: rotate(180deg) scale(1.05); box-shadow: 0 0 15px rgba(51, 204, 255, 0.8); }
+    100% { transform: rotate(180deg) scale(1); box-shadow: 0 0 0 rgba(51, 204, 255, 0); }
+}
+
+@keyframes tokenBob {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-6px) scale(1.1); box-shadow: 0 6px 8px rgba(0,0,0,0.4); }
+    100% { transform: translateY(0); }
+}
+
+/* Applying animations to existing classes */
+#setup { animation: fadeInScale 1s ease-out; }
+#setup h1 { animation: bounceTitle 2s infinite; text-shadow: 2px 2px 10px rgba(0,0,0,0.5); }
+.modal-content { animation: popInModal 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+.card-deck-visual { animation: pulseCardDeck 2s infinite; transition: all 0.3s; }
+.token { animation: tokenBob 1.5s infinite ease-in-out; }
+/* ---------------------- */
+
+.center-branding {
+    grid-column: 2 / 10;  /* keeps it in the middle of your grid */
+    grid-row: 2 / 11;
+    background: #bdc3c7; /* greyish color */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    border: 2px solid #555;
+    margin: 5px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+}
+
+.main-title {
+    font-size: 3.5rem;
+    font-weight: 900;
+    text-align: center;
+    line-height: 1;
+    color: black; /* text color is now black-- tbh i had trouble with this */
+    background: none; /* remove gradient background */
+    -webkit-background-clip: initial; /* reset */
+    -webkit-text-fill-color: black; /* force black text */
+    animation: none; /* remove any animation */
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+}
+
+/* THE BOARD GRID */
+.board-container {
+    display: grid;
+    grid-template-columns: repeat(10, 70px);
+    grid-template-rows: repeat(11, 75px);
+    gap: 2px;
+    background: rgba(51, 51, 51, 0.9); /* slight transparency for bg */
+    padding: 10px;
+    border: 8px solid #000;
+    border-radius: 10px;
+    position: relative;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+
+.cell {
+    background: white; border: 1px solid #444;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    font-weight: 800; color: #000; position: relative; font-size: 1.2rem;
+}
+
+/* Center Area Styling */
+.center-branding {
+    grid-column: 2 / 10;
+    grid-row: 2 / 11;
+    background: rgba(255, 255, 255, 0.95);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: space-around;
+    border: 2px solid #555; margin: 5px;
+}
+
+.shop-logo {
+    background: var(--tile-pink); padding: 20px 60px;
+    border: 4px solid #000; font-size: 3rem; font-style: italic;
+    color: black; /* change text color here */
+}
+
+.main-title { font-size: 3.5rem; text-align: center; line-height: 1; font-weight: 900; }
+
+.card-deck-visual {
+    width: 200px; height: 120px; border: 4px solid #8b4513;
+    background: linear-gradient(to right, #ff9999 33%, #fff 33%, #fff 66%, #33ccff 66%);
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 15px; transform: rotate(180deg);
+    color: black; /* change text color here */
+}
+
+/* Color Classes */
+.b { background-color: var(--tile-blue); }
+.y { background-color: var(--tile-yellow); }
+.w { background-color: var(--tile-white); }
+.p { background-color: var(--tile-purple); }
+.g { background-color: var(--tile-green); }
+.pk { background-color: var(--tile-pink); }
+.shop-tile { font-size: 0.7rem; text-align: center; line-height: 1; }
+
+/* Players */
+.marker-zone {
+    position: absolute;
+    bottom: 4px;
+    left: 4px;
+    right: 4px;
+    display: flex;
+    justify-content: center;
+    gap: 3px;
+}
+.token { width: 20px; height: 20px; border-radius: 50%; border: 2px solid #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.3); }
+.p1-token { background: var(--p1); } .p2-token { background: var(--p2); }
+
+/* UI Elements */
+/* let this one be for the h1 part, the rest below will be for h2*/
+.two-player-btn {
+    position: fixed;
+
+    /* POSITION */
+    left: 30px;
+    bottom: 30px;
+
+    /* SIZE */
+    width: 600px;
+    height: 300px;
+
+    /* TEXT */
+    font-size: 2rem;
+    font-weight: 800;
+
+    /* LOOK */
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 20px;
+
+    cursor: pointer;
+}
+.two-player-btn img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+    border-radius: 20px;
+}
+    /* VS BOT button */
+.vs-bot-btn {
+    position: fixed;
+
+    right: 30px;
+    bottom: 30px;
+
+    width: 600px;
+    height: 300px;
+
+    font-size: 2rem;
+    font-weight: 800;
+
+    border-radius: 20px;
+    cursor: pointer;
+}
+.vs-bot-btn img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+    border-radius: 20px;
+}
+.Design {
+    width: 1475px;
+
+    height: 300px;
+    margin: 30px;
+    transform: translateY(-50px);
+}
+.title-area h1 {
+    font-size: 5rem;
+    width: 60px;
+    font-weight: 900;
+    color: transparent;
+    background: transparent;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.two-player-btn:active img {
+    transform: scale(0.95);
+}
+.vs-bot-btn:active img {
+    transform: scale(0.95);
+}
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
+}
+/* let this one be for the bot part, still a part of h1, we make it like chess.com, adjustable sized images per image option.*/
+.Largo {
+    position: fixed;
+    left: 70%;
+    bottom: 30px;
+    width: 300px;
+    height: 300px;
+    font-size: 2rem;
+    font-weight: 800;
+    background: transparent;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+.Largo img {
+    position: relative;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+    border-radius: 20px;
+}
+.Bargo {
+    position: fixed;
+    left: 50%;
+    bottom: 30px;
+    width: 300px;
+    height: 300px;
+    font-size: 2rem;
+    font-weight: 800;
+    background: transparent;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+.Bargo img {
+    position: relative;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+    border-radius: 20px;
+}
+.Margo {
+    position: fixed;
+    left: 29.9%;
+    bottom: 30px;
+    width: 300px;
+    height: 300px;
+    font-size: 2rem;
+    font-weight: 800;
+    background: transparent;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+.Margo img {
+    position: relative;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+    border-radius: 20px;
+}
+.Largo:active img,
+.Bargo:active img,
+.Margo:active img {
+    transform: scale(0.95);
+
+}
+
+/* finally miles, back to main menu */
+/* BACK TO MAIN MENU */
+.back-menu-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+
+    width: 90px;
+    height: 90px;
+
+    padding: 0;
+    margin: 0;
+
+    background: white;
+    color: black;
+
+    border: 4px solid black;
+    border-radius: 15px;
+
+    cursor: pointer;
+
+    z-index: 999999;
+}
+
+.back-menu-btn img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    pointer-events: none;
+    border-radius: 10px;
+}
+
+.back-menu-btn:active img {
+    transform: scale(0.95);
+}
+
+/* Same click effect as my other image buttons of course its just cop and pasted from others */
+.back-menu-btn:active img {
+    transform: scale(0.95);
+}
+
+#backMenuBtn {
+    display: none;
+}
+.controls { margin-top: 20px; text-align: center; background: rgba(0,0,0,0.6); padding: 15px; border-radius: 15px; width: 700px; }
+.btn { padding: 10px 20px; border-radius: 8px; border: none; font-weight: bold; cursor: pointer; margin: 5px; transition: transform 0.2s, filter 0.2s; }
+.btn:hover { transform: scale(1.05); filter: brightness(1.2); }
+.btn-draw { background: #27ae60; color: white; font-size: 1.5rem; width: 100%; }
+.btn-draw:disabled { background: #7f8c8d; cursor: not-allowed; transform: none; filter: none; }
+.modal { position: fixed; inset: 0; background: rgba(0,0,0,0.9); display: none; align-items: center; justify-content: center; z-index: 100; }
+.modal-content {
+    position: relative;
+    background: white;
+    color: black;
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    width: 400px;
+}
+
+/* Charzcter hover, my best invention yet*/
+.Largo,
+.Bargo,
+.Margo {
+    position: fixed;
+}
+
+/* The description box */
+.character-tooltip {
+    position: absolute;
+
+    /* Put it above the character */
+    bottom: 105%;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+
+    width: 250px;
+    padding: 15px;
+
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+
+    border: 2px solid white;
+    border-radius: 15px;
+
+    text-align: center;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition: opacity 0.25s ease,
+                transform 0.25s ease;
+
+    pointer-events: none;
+
+    z-index: 9999;
+}
+
+/* Title */
+.character-tooltip h3 {
+    margin: 0 0 5px;
+    font-size: 1.5rem;
+}
+
+/* Difficulty */
+.character-tooltip p {
+    margin: 5px 0;
+    font-weight: bold;
+}
+
+/* Description */
+.character-tooltip span {
+    display: block;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+/* SHOW DESCRIPTION WHEN HOVERING */
+.Largo:hover .character-tooltip,
+.Bargo:hover .character-tooltip,
+.Margo:hover .character-tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+#scratchPad {
+    position: absolute;
+    width: 300px;
+    height: 450px;
+
+    background: #eee;
+    border: 2px solid #999;
+    border-radius: 20px;
+
+    /* besidea the card */
+    left: 110%;
+    bottom: 1%;
+
+    z-index: 200;
+
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+#scratchPad {
+    animation: scratchPop 0.3s ease-out;
+}
+
+@keyframes scratchPop {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    70% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/*bot selections*/
+#bot-options {
+    transition: all 0.3s ease;
+}
+
+/* When a bot is selected, blur everything behind it */
+#bot-options.bot-selected > button:not(.selected-bot) {
+    filter: blur(5px) brightness(0.5);
+    transform: scale(0.9);
+    transition: all 0.3s ease;
+}
+
+/* Selected bot becomes the focus */
+#bot-options .selected-bot {
+    filter: brightness(1.2);
+    transform: scale(1.15);
+    z-index: 9999;
+    transition: all 0.3s ease;
+}
+
+/* Slight darkening behind the bots */
+#bot-options.bot-selected::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    z-index: 9000;
+    pointer-events: none;
+}
+
+/* --- NEW CARD FLIP CSS --- */
+#cardModal .modal-content { 
+    background: transparent; padding: 0; box-shadow: none; animation: none; 
+    perspective: 1000px; width: 400px; height: 480px; 
+}
+.flip-inner { 
+    position: relative; width: 100%; height: 100%; text-align: center; 
+    transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-style: preserve-3d; 
+}
+.flip-inner.flipped { transform: rotateY(180deg); }
+.flip-front, .flip-back { 
+    position: absolute; width: 100%; height: 100%; backface-visibility: hidden; 
+    border-radius: 20px; box-sizing: border-box; display: flex; flex-direction: column; 
+    align-items: center; justify-content: center; box-shadow: 0 15px 30px rgba(0,0,0,0.6);
+}
+.flip-front { 
+    background: linear-gradient(135deg, var(--tile-blue), var(--tile-purple)); 
+    color: white; border: 10px solid white; 
+}
+.flip-back { 
+    background: white; color: black; padding: 30px; transform: rotateY(180deg); 
+}
+/* ------------------------- */
+#statsPanel {
+    display: none; /* hide initially */
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    width: 220px;
+    background: rgba(0,0,0,0.75);
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    z-index: 999;
+    box-shadow: 0 0 15px rgba(0,0,0,0.6);
+}
