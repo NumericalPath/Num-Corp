@@ -538,6 +538,7 @@ html, body {
 .Bargo,
 .Margo {
     position: fixed;
+    z-index: 10000;
 }
 
 /* The description box */
