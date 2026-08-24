@@ -283,7 +283,7 @@ function startTimerLogic() {
     if (isVsBot) {
         if (botDifficulty === 'Easy') time = 45;
         else if (botDifficulty === 'Medium') time = 30;
-        else if (botDifficulty === 'Mar') time = 15;
+        else if (botDifficulty === 'Hard') time = 15;
     }
     
     document.getElementById('timerDisp').textContent = time;
