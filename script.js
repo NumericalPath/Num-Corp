@@ -124,13 +124,77 @@ function closeTutorial() {
     modal.classList.remove('flame-border');
 }
 
+function resetGameData() {
+    players = [
+        {pos: 0, score: 0, pine: 0, grape: 0, straw: 0},
+        {pos: 0, score: 0, pine: 0, grape: 0, straw: 0}
+    ];
+
+    turn = 0;
+    correctStreak = 0;
+    wrongAnswers = [];
+    currentDifficulty = 1;
+
+    clearInterval(timerObj);
+
+    // Reset displayed scores
+    document.getElementById('p1-score').textContent = '0';
+    document.getElementById('p2-score').textContent = '0';
+    document.getElementById('turnLabel').textContent = 'Player 1 Turn';
+
+    // Reset leaderboard display
+    updateLeaderboard();
+
+    // Reset teacher statistics
+    updateStatsPanel();
+}
+
 function startGame(bot) {
     isVsBot = bot;
 
+    // RESET PLAYER DATA
+    players[0].pos = 0;
+    players[0].score = 0;
+    players[0].pine = 0;
+    players[0].grape = 0;
+    players[0].straw = 0;
+
+    players[1].pos = 0;
+    players[1].score = 0;
+    players[1].pine = 0;
+    players[1].grape = 0;
+    players[1].straw = 0;
+
+    // RESET OTHER GAME DATA
+    turn = 0;
+    correctStreak = 0;
+    wrongAnswers = [];
+    currentDifficulty = 1;
+
+    clearInterval(timerObj);
+
+    // RESET LEADERBOARD DISPLAY
+    document.getElementById('p1-pine').textContent = '0';
+    document.getElementById('p1-grape').textContent = '0';
+    document.getElementById('p1-straw').textContent = '0';
+    document.getElementById('p1-total').textContent = '0';
+
+    document.getElementById('p2-pine').textContent = '0';
+    document.getElementById('p2-grape').textContent = '0';
+    document.getElementById('p2-straw').textContent = '0';
+    document.getElementById('p2-total').textContent = '0';
+
+    // RESET TOP SCORES
+    document.getElementById('p1-score').textContent = '0';
+    document.getElementById('p2-score').textContent = '0';
+
+    document.getElementById('turnLabel').textContent = 'Player 1 Turn';
+
+    // SHOW GAME
     document.getElementById('setup').style.display = 'none';
     document.getElementById('game').style.display = 'block';
 
-    // SHOW BACK BUTTON IN GAME
+    // SHOW BACK BUTTON
     document.getElementById('backMenuBtn').style.display = 'block';
 
     initBoard();
@@ -207,6 +271,7 @@ function closeShop() {
 
 function initBoard() {
     const b = document.getElementById('board');
+    b.querySelectorAll('.cell').forEach(cell => cell.remove());
     boardMap.forEach(data => {
         const cell = document.createElement('div');
         cell.className = `cell ${data[1]}`;
@@ -428,38 +493,57 @@ function switchTurn() {
 
 // Advanced Bot Execution Logic
 function executeBotTurn() {
-    const botCard = deck[Math.floor(Math.random()*deck.length)];
-    let thinkTime = 1000;
+    // Use the current difficulty's question deck
+    const currentDeck = decks[currentDifficulty];
+
+    const botCard = currentDeck[
+        Math.floor(Math.random() * currentDeck.length)
+    ];
+
+    let thinkTime = 1500;
     let isCorrect = true;
 
     // Difficulty Matrix
     if (botDifficulty === 'Easy') {
-        thinkTime = Math.random() * 3000 + 4000; // 4-7 seconds (Slow)
-        isCorrect = Math.random() > 0.4; // 60% chance to be right
-    } else if (botDifficulty === 'Medium') {
-        thinkTime = Math.random() * 2000 + 2000; // 2-4 seconds (Average)
-        isCorrect = Math.random() > 0.15; // 85% chance to be right
-    } else if (botDifficulty === 'Mar') {
-        thinkTime = Math.random() * 1000 + 500; // 0.5-1.5 seconds (Lightning Fast)
-        isCorrect = Math.random() > 0.02; // 98% chance to be right
+        thinkTime = 1500;
+        isCorrect = Math.random() > 0.4; // 60% chance
+    } 
+    else if (botDifficulty === 'Medium') {
+        thinkTime = 1000;
+        isCorrect = Math.random() > 0.15; // 85% chance
+    } 
+    else if (botDifficulty === 'Hard') {
+        thinkTime = 700;
+        isCorrect = Math.random() > 0.02; // 98% chance
     }
 
     setTimeout(() => {
-        let msg = isCorrect 
-            ? `<b>Bot got it right!</b><br>Bot calculated: ${botCard.tutorial}<br>Moving ${botCard.m} spaces.` 
-            : `<b>Bot got it wrong!</b><br>Bot fumbled the math.`;
-            
+        let msg = isCorrect
+            ? `<b>Bot got it right!</b><br>
+               Bot calculated: ${botCard.tutorial}<br>
+               Moving ${botCard.m} spaces.`
+            : `<b>Bot got it wrong!</b><br>
+               Bot fumbled the math.`;
+
         showTutorial(msg);
-        
-        const tutorialCloseBtn = document.querySelector('#tutorialModal .btn');
+
+        const tutorialCloseBtn =
+            document.querySelector('#tutorialModal .btn');
+
         tutorialCloseBtn.onclick = function() {
             closeTutorial();
+
             let shopLanded = false;
+
             if(isCorrect) {
                 shopLanded = movePlayer(botCard.m);
             }
-            if(!shopLanded) switchTurn();
+
+            if(!shopLanded) {
+                switchTurn();
+            }
         };
+
     }, thinkTime);
 }
 

@@ -350,26 +350,13 @@ body {
     pointer-events: none;
     border-radius: 20px;
 }
-
-
-.title-area {
-    position: relative;
-    width: 100%;
-    height: 350px;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-}
-
 .Design {
     width: 1475px;
-    height: 300px;
-    object-fit: cover;
-    display: block;
-    margin: 0;
-    z-index: 1;
-}
 
+    height: 300px;
+    margin: 30px;
+    transform: translateY(-50px);
+}
 .title-area h1 {
     font-size: 5rem;
     width: 60px;
@@ -382,7 +369,6 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
 }
-
 .two-player-btn:active img {
     transform: scale(0.95);
 }
@@ -444,7 +430,7 @@ html, body {
 }
 .Margo {
     position: fixed;
-    left: 10%;
+    left: 29.9%;
     bottom: 30px;
     width: 300px;
     height: 300px;
@@ -538,7 +524,6 @@ html, body {
 .Bargo,
 .Margo {
     position: fixed;
-    z-index: 10000;
 }
 
 /* The description box */
@@ -665,11 +650,6 @@ html, body {
     background: rgba(0, 0, 0, 0.35);
     z-index: 9000;
     pointer-events: none;
-}
-
-#bot-options {
-    position: relative;
-    z-index: 10;
 }
 
 /* --- NEW CARD FLIP CSS --- */
