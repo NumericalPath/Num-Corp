@@ -488,6 +488,17 @@ function clearCanvas() {
 
 //Mainmenu button, finally added after days
 function backToMainMenu() {
+
+    players = [
+    {pos:0, score:0, pine:0, grape:0, straw:0},
+    {pos:0, score:0, pine:0, grape:0, straw:0}
+    ];
+
+    turn = 0;
+    correctStreak = 0;
+    wrongAnswers = [];
+    currentDifficulty = 1;
+    
     clearInterval(timerObj);
 
     // Hide game
