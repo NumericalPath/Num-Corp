@@ -300,15 +300,79 @@ let currentDifficulty = 1;
 const decks = {
     1: [
         { q: '24 + 16', a: 40, m: 3, tutorial: '24 + 16 = 40' },
-        { q: '9 x 6', a: 54, m: 4, tutorial: '9 × 6 = 54' }
+        { q: '9 x 6', a: 54, m: 4, tutorial: '9 × 6 = 54' },
+        { q: '45 - 17', a: 28, m: 3, tutorial: '45 - 17 = 28' },
+        { q: '72 ÷ 8', a: 9, m: 3, tutorial: '72 ÷ 8 = 9' },
+        { q: '15 + 27', a: 42, m: 4, tutorial: '15 + 27 = 42' },
+        { q: '63 - 29', a: 34, m: 3, tutorial: '63 - 29 = 34' },
+        { q: '7 x 8', a: 56, m: 4, tutorial: '7 × 8 = 56' },
+        { q: '81 ÷ 9', a: 9, m: 3, tutorial: '81 ÷ 9 = 9' },
+        { q: '36 + 19', a: 55, m: 4, tutorial: '36 + 19 = 55' },
+        { q: '100 - 46', a: 54, m: 3, tutorial: '100 - 46 = 54' },
+        { q: '12 x 5', a: 60, m: 4, tutorial: '12 × 5 = 60' },
+        { q: '96 ÷ 12', a: 8, m: 3, tutorial: '96 ÷ 12 = 8' },
+        { q: '18 + 34', a: 52, m: 4, tutorial: '18 + 34 = 52' },
+        { q: '70 - 25', a: 45, m: 3, tutorial: '70 - 25 = 45' },
+        { q: '11 x 7', a: 77, m: 4, tutorial: '11 × 7 = 77' }
     ],
+
     2: [
-        { q: '3 + 4 x 5', a: 23, m: 4, tutorial: 'Order: 4×5=20 +3 = 23' },
-        { q: '50 - 25 ÷ 5', a: 45, m: 4, tutorial: '25÷5=5 → 50-5=45' }
+        { q: '3 + 4 x 5', a: 23, m: 4, tutorial: '4 × 5 = 20, then 20 + 3 = 23.' },
+        { q: '50 - 25 ÷ 5', a: 45, m: 4, tutorial: '25 ÷ 5 = 5, then 50 - 5 = 45.' },
+        { q: '8 + 6 x 3', a: 26, m: 5, tutorial: '6 × 3 = 18, then 18 + 8 = 26.' },
+        { q: '(12 + 8) ÷ 4', a: 5, m: 4, tutorial: '12 + 8 = 20, then 20 ÷ 4 = 5.' },
+        { q: '6 x (9 - 4)', a: 30, m: 5, tutorial: '9 - 4 = 5, then 6 × 5 = 30.' },
+        { q: '7 x 5 - 12', a: 23, m: 4, tutorial: '7 × 5 = 35, then 35 - 12 = 23.' },
+        { q: '18 + 24 ÷ 6', a: 22, m: 4, tutorial: '24 ÷ 6 = 4, then 18 + 4 = 22.' },
+        { q: '(15 - 3) x 2', a: 24, m: 5, tutorial: '15 - 3 = 12, then 12 × 2 = 24.' },
+        { q: '64 ÷ 8 + 12', a: 20, m: 4, tutorial: '64 ÷ 8 = 8, then 8 + 12 = 20.' },
+        { q: '9 x 4 + 6', a: 42, m: 5, tutorial: '9 × 4 = 36, then 36 + 6 = 42.' },
+
+        { q: 'x + 7 = 15', a: 8, m: 4, tutorial: 'Subtract 7 from both sides: x = 15 - 7 = 8.' },
+        { q: 'x - 9 = 12', a: 21, m: 4, tutorial: 'Add 9 to both sides: x = 12 + 9 = 21.' },
+        { q: '3x = 21', a: 7, m: 5, tutorial: 'Divide both sides by 3: x = 21 ÷ 3 = 7.' },
+        { q: 'x ÷ 4 = 6', a: 24, m: 5, tutorial: 'Multiply both sides by 4: x = 6 × 4 = 24.' },
+        { q: '2x + 5 = 17', a: 6, m: 5, tutorial: 'Subtract 5: 2x = 12. Divide by 2: x = 6.' },
+        { q: '4x - 3 = 21', a: 6, m: 5, tutorial: 'Add 3: 4x = 24. Divide by 4: x = 6.' },
+        { q: '5x + 2 = 27', a: 5, m: 6, tutorial: 'Subtract 2: 5x = 25. Divide by 5: x = 5.' },
+
+        { q: '1/2 + 1/4', a: 0.75, m: 4, tutorial: 'Convert 1/2 to 2/4. Then 2/4 + 1/4 = 3/4 = 0.75.' },
+        { q: '3/4 - 1/4', a: 0.5, m: 4, tutorial: 'Subtract the numerators: 3/4 - 1/4 = 2/4 = 1/2 = 0.5.' },
+        { q: '1/3 + 1/6', a: 0.5, m: 5, tutorial: 'Convert 1/3 to 2/6. Then 2/6 + 1/6 = 3/6 = 1/2 = 0.5.' },
+        { q: '3/5 + 1/5', a: 0.8, m: 4, tutorial: '3/5 + 1/5 = 4/5 = 0.8.' },
+        { q: '5/6 - 1/3', a: 0.5, m: 5, tutorial: 'Convert 1/3 to 2/6. Then 5/6 - 2/6 = 3/6 = 1/2 = 0.5.' },
+        { q: '2/3 x 3', a: 2, m: 5, tutorial: '2/3 × 3 = 6/3 = 2.' }
     ],
+
     3: [
-        { q: '12² + 5', a: 149, m: 6, tutorial: '12²=144 +5 =149' },
-        { q: '(8 x 3)²', a: 576, m: 7, tutorial: '8×3=24 → 24²=576' }
+        { q: '12² + 5', a: 149, m: 6, tutorial: '12² = 144, then 144 + 5 = 149.' },
+        { q: '(8 x 3)²', a: 576, m: 7, tutorial: '8 × 3 = 24, then 24² = 576.' },
+        { q: '15² - 20', a: 205, m: 6, tutorial: '15² = 225, then 225 - 20 = 205.' },
+        { q: '10² + 7 x 3', a: 121, m: 6, tutorial: '10² = 100 and 7 × 3 = 21. Then 100 + 21 = 121.' },
+        { q: '18² ÷ 9', a: 36, m: 6, tutorial: '18² = 324, then 324 ÷ 9 = 36.' },
+        { q: '(5 + 7)²', a: 144, m: 7, tutorial: '5 + 7 = 12, then 12² = 144.' },
+        { q: '20² - 15²', a: 175, m: 7, tutorial: '20² = 400 and 15² = 225. Then 400 - 225 = 175.' },
+        { q: '6² + 8²', a: 100, m: 6, tutorial: '6² = 36 and 8² = 64. Then 36 + 64 = 100.' },
+
+        { q: '3x + 7 = 22', a: 5, m: 6, tutorial: 'Subtract 7: 3x = 15. Divide by 3: x = 5.' },
+        { q: '5x - 8 = 27', a: 7, m: 6, tutorial: 'Add 8: 5x = 35. Divide by 5: x = 7.' },
+        { q: '4x + 9 = 33', a: 6, m: 6, tutorial: 'Subtract 9: 4x = 24. Divide by 4: x = 6.' },
+        { q: '7x - 5 = 30', a: 5, m: 7, tutorial: 'Add 5: 7x = 35. Divide by 7: x = 5.' },
+        { q: '2x + 10 = 30', a: 10, m: 6, tutorial: 'Subtract 10: 2x = 20. Divide by 2: x = 10.' },
+        { q: '3(x + 2) = 18', a: 4, m: 7, tutorial: 'Divide by 3: x + 2 = 6. Subtract 2: x = 4.' },
+        { q: '2(x - 3) = 14', a: 10, m: 7, tutorial: 'Divide by 2: x - 3 = 7. Add 3: x = 10.' },
+        { q: '5(x + 1) = 30', a: 5, m: 7, tutorial: 'Divide by 5: x + 1 = 6. Subtract 1: x = 5.' },
+
+        { q: '1/2 + 2/3', a: 7/6, m: 7, tutorial: 'The LCD is 6. 1/2 = 3/6 and 2/3 = 4/6. Therefore 3/6 + 4/6 = 7/6.' },
+        { q: '3/4 + 2/5', a: 23/20, m: 7, tutorial: 'The LCD is 20. 3/4 = 15/20 and 2/5 = 8/20. Therefore 15/20 + 8/20 = 23/20.' },
+        { q: '5/6 - 1/4', a: 7/12, m: 7, tutorial: 'The LCD is 12. 5/6 = 10/12 and 1/4 = 3/12. Therefore 10/12 - 3/12 = 7/12.' },
+        { q: '2/3 x 3/4', a: 0.5, m: 6, tutorial: 'Multiply numerators and denominators: (2 × 3)/(3 × 4) = 6/12 = 1/2 = 0.5.' },
+        { q: '3/5 ÷ 2/3', a: 0.9, m: 7, tutorial: 'Multiply by the reciprocal: 3/5 × 3/2 = 9/10 = 0.9.' },
+        { q: '7/8 - 1/2', a: 0.375, m: 6, tutorial: 'Convert 1/2 to 4/8. Then 7/8 - 4/8 = 3/8 = 0.375.' },
+
+        { q: '2² + 3³', a: 31, m: 7, tutorial: '2² = 4 and 3³ = 27. Then 4 + 27 = 31.' },
+        { q: '(4 + 2)² - 10', a: 26, m: 7, tutorial: '4 + 2 = 6. Then 6² = 36. Finally, 36 - 10 = 26.' },
+        { q: '5² + 12²', a: 169, m: 7, tutorial: '5² = 25 and 12² = 144. Then 25 + 144 = 169.' }
     ]
 };
 
