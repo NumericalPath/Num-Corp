@@ -428,9 +428,10 @@ html, body {
     pointer-events: none;
     border-radius: 20px;
 }
+
 .Margo {
     position: fixed;
-    left: 5%;
+    left: 4%;
     bottom: 30px;
     width: 300px;
     height: 300px;
