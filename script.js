@@ -410,9 +410,9 @@ function startTimerLogic() {
     // Timer adjusts based on bot difficulty mode (affects human player too to balance)
     let time = 30;
     if (isVsBot) {
-        if (botDifficulty === 'Easy') time = 45;
-        else if (botDifficulty === 'Medium') time = 30;
-        else if (botDifficulty === 'Hard') time = 15;
+        if (botDifficulty === 'Easy') time = 20;
+        else if (botDifficulty === 'Medium') time = 15;
+        else if (botDifficulty === 'Hard') time = 10;
     }
     
     document.getElementById('timerDisp').textContent = time;
